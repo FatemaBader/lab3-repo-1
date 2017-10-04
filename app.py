@@ -19,6 +19,19 @@ def hello(): # Name of the method
     cur.execute('''SELECT * FROM students''') # execute an SQL statment
     rv = cur.fetchall() #Retreive all rows returend by the SQL statment
     return str(rv)      #Return the data in a string format
+@app.route("/add/<name>")
+def  insert(name):
+    cur = mysql.connection.cursor() #create a connection to the SQL instance
+    cur.execute('''INSERT INTO students (studentName, email) values ("%s", "thirdstudent@mydit.ie")''' % name) # execute an SQL statment
+    cur.execute('''commit''')
+    rv = cur.fetchall() #Retreive all rows returend by the SQL statment
+    return str(rv)      #Return the data in a string format
+
+
+
+
+
+
 if __name__ == "__main__":
         app.run(host='0.0.0.0', port='5000') #Run the flask app at port 5000
 
